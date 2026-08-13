@@ -9,7 +9,7 @@ from langchain_community.retrievers import BM25Retriever
 from langchain_core.embeddings import Embeddings
 from langchain_openrouter import ChatOpenRouter
 from langchain_groq import ChatGroq
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter, MarkdownHeaderTextSplitter
 from langchain_classic.chains.conversational_retrieval.base import ConversationalRetrievalChain
 from langchain_core.prompts import PromptTemplate
 from langchain_core.documents import Document
@@ -155,13 +155,49 @@ class CustomDocChatbot:
 
     @traceable(run_type="tool", name="Text_Splitter")
     def split_documents(self, docs):
-        """Split documents into chunks."""
+        """Chunk the corpus so every chunk says what it belongs to.
+
+        Plain recursive splitting left 11 of 20 project chunks with no
+        heading: a chunk reading "How it works: hybrid retrieval, Qdrant
+        dense..." arrived with nothing identifying it as AskUmer. Retrieval
+        then handed the model several such orphans from different projects at
+        once and it stapled them together — describing AskUmer as running on
+        React/Expo/Supabase (that is the housing platform) and the Revera
+        try-on system as using SmartSearch's search stack.
+
+        Splitting on markdown headings first and stamping the heading onto
+        every chunk makes each one self-identifying, so facts cannot migrate
+        between projects.
+        """
         try:
-            text_splitter = RecursiveCharacterTextSplitter(
+            splitter = RecursiveCharacterTextSplitter(
                 chunk_size=900, chunk_overlap=120, add_start_index=True
             )
-            splits = text_splitter.split_documents(docs)
-            logger.info({"message": f"📑 Created {len(splits)} chunks"})
+            header_splitter = MarkdownHeaderTextSplitter(
+                headers_to_split_on=[("#", "doc"), ("##", "section")],
+                strip_headers=False,
+            )
+
+            splits = []
+            for doc in docs:
+                source = doc.metadata.get("source", "résumé")
+                is_markdown = str(source).endswith(".md")
+
+                sections = (
+                    header_splitter.split_text(doc.page_content) if is_markdown else [doc]
+                )
+                for section in sections:
+                    label = section.metadata.get("section") or section.metadata.get("doc") or source
+                    for chunk in splitter.split_documents([section]):
+                        # The tag is what stops a chunk being attributed to the
+                        # wrong project once it is out of document order.
+                        chunk.page_content = f"[Source: {source} — {label}]\n{chunk.page_content}"
+                        chunk.metadata["source"] = source
+                        chunk.metadata["section"] = label
+                        splits.append(chunk)
+
+            tagged = sum(1 for s in splits if s.page_content.startswith("[Source:"))
+            logger.info({"message": f"📑 Created {len(splits)} chunks ({tagged} source-tagged)"})
             return splits
         except Exception as e:
             logger.error({"message": f"❌ Error splitting documents: {str(e)}"})
@@ -175,13 +211,15 @@ class CustomDocChatbot:
     PROMPT = """You are Muhammad Umer Khan, an AI engineer, answering a visitor on your portfolio. First person.
 
 RULES
-1. Answer only from CONTEXT. Never invent metrics, dates, employers or client names.
-2. Missing from CONTEXT: say so in one line, then offer the nearest thing you can answer.
-3. 1-3 sentences. Bullets only for real lists. No preamble, no sign-off, no restating the question.
-4. Keep concrete specifics — model names, thresholds, tools. They are the evidence; generalities are not.
-5. Claim exactly what CONTEXT supports. Never upgrade "in development" to "shipped".
-6. Plain professional tone. At most one emoji, only where it genuinely helps.
-7. Contact details: {contact}
+1. Use only CONTEXT. Never invent metrics, dates, employers, model names or clients.
+2. Every chunk is tagged [Source: file — section]. Facts belong ONLY to their own tag. Never describe one project with another's stack, metrics or features.
+3. Greeting or small talk ("hi", "thanks"): one warm line, invite a question. It is not a lookup — never answer it with "not in context".
+4. Genuinely absent: say so in one line, then offer the nearest thing you can answer. Never guess.
+5. Dates: "Feb 2025 — Present" means still there. Never infer a role ended, and never state availability that CONTEXT does not.
+6. Max 3 sentences, or up to 5 bullets for a real list. No preamble, no sign-off.
+7. Keep specifics — model names, thresholds, tools. They are the evidence.
+8. Claim exactly what CONTEXT supports. Never upgrade "in development" to "shipped" or a threshold into an achieved score.
+9. Give contact details ONLY if asked how to reach you: {contact}
 
 CONTEXT:
 {context}
