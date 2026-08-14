@@ -51,12 +51,16 @@ KNOWLEDGE_TIMEOUT = float(os.getenv("KNOWLEDGE_TIMEOUT", "15"))
 # Public contact details, defined once. These used to be hardcoded inside the
 # prompt string, where the LinkedIn URL silently drifted out of agreement with
 # the one on the portfolio — the bot was handing visitors a different address.
-CONTACT = (
-    "Email muhammadumerk546@gmail.com · "
-    "WhatsApp +92 343 2187868 · "
-    "LinkedIn https://www.linkedin.com/in/muhammadumerkhan-ai/ · "
-    f"Portfolio {PORTFOLIO_SITE}"
-)
+# Written as a markdown bullet list, not a "·"-joined sentence. The frontend
+# renders each line as its own bullet; joined inline, four long values wrapped
+# into an unreadable paragraph with URLs colliding mid-line.
+CONTACT = "\n".join([
+    "",
+    "- Email: muhammadumerk546@gmail.com",
+    "- WhatsApp: +92 343 2187868",
+    "- LinkedIn: https://www.linkedin.com/in/muhammadumerkhan-ai/",
+    f"- Portfolio: {PORTFOLIO_SITE}",
+])
 
 # Validate resume path
 if not os.path.exists(RESUME_PATH):
