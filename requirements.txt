@@ -1,15 +1,37 @@
-fastapi
-uvicorn
-gunicorn
-langchain
-langchain-community
-langchain-groq
-langchain-openai
-faiss-cpu
-pydantic
-PyPDF2
-pypdf
-python-dotenv
-httpx
-cachetools
-langsmith
+# Mirrors the dependencies in pyproject.toml, which is what deploys build from
+# (uv + uv.lock). Kept in step so `pip install -r requirements.txt` produces a
+# working environment — it previously did not, which is why the pipeline could
+# not be run outside a uv-managed checkout.
+
+# API
+fastapi>=0.121.2
+uvicorn>=0.38.0
+gunicorn>=23.0.0
+pydantic>=2.12.4
+
+# LangChain. langchain-classic, langchain-core and langchain-text-splitters are
+# imported directly by src/rag_pipeline.py and are declared here rather than
+# relied on as transitive dependencies of `langchain` — a package that imports
+# it should require it, or a future release quietly breaks the build.
+langchain>=1.0.7
+langchain-classic>=1.0.0
+langchain-core>=1.4.7
+langchain-text-splitters>=1.0.0
+langchain-community>=0.4.1
+langchain-groq>=1.0.1
+langchain-openai>=1.0.3
+langchain-openrouter>=0.2.3
+
+# Retrieval
+faiss-cpu>=1.13.0
+rank-bm25>=0.2.2
+
+# Documents
+pypdf>=6.3.0
+pypdf2>=3.0.1
+
+# Runtime
+httpx>=0.28.1
+cachetools>=6.2.2
+python-dotenv>=1.2.1
+langsmith>=0.4.43
