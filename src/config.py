@@ -37,9 +37,9 @@ EMBEDDING_MODEL = "nvidia/llama-nemotron-embed-vl-1b-v2:free"
 # re-syncs itself whenever the site redeploys — no manual copy step, so it
 # cannot drift out of date again.
 # ---------------------------------------------------------------------------
-# The live portfolio since 2026-10-28. Fetches follow redirects, so the custom
-# domain can take over later without a change here.
-PORTFOLIO_SITE = os.getenv("PORTFOLIO_SITE", "https://buildwithumer.vercel.app").rstrip("/")
+# The portfolio's own domain (2026-10-28); the old Vercel addresses redirect
+# here. It is also the "Portfolio:" link the bot gives in its answers.
+PORTFOLIO_SITE = os.getenv("PORTFOLIO_SITE", "https://buildwithumer.site").rstrip("/")
 
 # The Next.js portfolio's routes: work.md carries every build under its own
 # heading with each case study in full, services.md the offer. Experience and
