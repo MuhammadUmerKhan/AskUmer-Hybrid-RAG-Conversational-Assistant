@@ -16,9 +16,13 @@ app = FastAPI(title="Muhammad Umer Khan's RAG Bot")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173", 
+        "http://localhost:5173",
+        "http://localhost:3100",  # the Next.js portfolio, served locally
         "https://muhammadumerkhaninfo.vercel.app",
-        "https://umerr.vercel.app"
+        "https://umerr.vercel.app",
+        "https://buildwithumer.vercel.app",  # the live portfolio since 2026-10-28
+        "https://buildwithumer.site",  # the portfolio's own domain, once bought
+        "https://www.buildwithumer.site",
         ],
     allow_credentials=True,
     allow_methods=["*"],
