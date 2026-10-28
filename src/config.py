@@ -32,16 +32,20 @@ EMBEDDING_MODEL = "nvidia/llama-nemotron-embed-vl-1b-v2:free"
 # LoRA configs, or the red-team findings.
 #
 # The portfolio already publishes that material as markdown generated from its
-# single source of truth (src/data.js) on every deploy, precisely so machines
-# can read it. Ingesting those routes triples the corpus AND means the bot
+# content files (src/content/) on every deploy, precisely so machines can read
+# it. Ingesting those routes triples the corpus AND means the bot
 # re-syncs itself whenever the site redeploys — no manual copy step, so it
 # cannot drift out of date again.
 # ---------------------------------------------------------------------------
-PORTFOLIO_SITE = os.getenv("PORTFOLIO_SITE", "https://umerr.vercel.app").rstrip("/")
+# The live portfolio since 2026-10-28. Fetches follow redirects, so the custom
+# domain can take over later without a change here.
+PORTFOLIO_SITE = os.getenv("PORTFOLIO_SITE", "https://buildwithumer.vercel.app").rstrip("/")
 
-# llms.txt is deliberately excluded — it is an index of links, not prose, and
-# would only add retrievable noise.
-KNOWLEDGE_ROUTES = ("about.md", "experience.md", "projects.md", "education.md")
+# The Next.js portfolio's routes: work.md carries every build under its own
+# heading with each case study in full, services.md the offer. Experience and
+# education come from the résumé. llms.txt is deliberately excluded — it is an
+# index of links, not prose, and would only add retrievable noise.
+KNOWLEDGE_ROUTES = ("about.md", "work.md", "services.md")
 
 # Snapshot committed alongside the code. Used when the live fetch fails, so a
 # portfolio outage or a cold start with no egress cannot take the bot down.
