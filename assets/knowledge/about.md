@@ -6,4 +6,4 @@ Muhammad Umer Khan is an AI engineer in Karachi, currently AI Engineer at Revera
 - Email: muhammadumerk546@gmail.com
 - WhatsApp: +92 343 2187868
 - Calls: 2pm to 11pm PKT
-- Résumé: https://buildwithumer.vercel.app/Muhammad_Umer_Khan_AI_Resume.pdf
+- Résumé: https://buildwithumer.site/Muhammad_Umer_Khan_AI_Resume.pdf

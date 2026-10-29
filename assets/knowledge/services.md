@@ -3,7 +3,7 @@
 ## AI agents and copilots
 LangGraph agents that call your tools and APIs, built for production with tracing from the first request.
 
-## RAG assistants with an evaluation gate
+## Assistants that answer from your documents
 Grounded in your documents, with hybrid retrieval and guardrails, and a faithfulness check that fails CI the moment quality drops.
 
 ## Voice agents
@@ -17,6 +17,9 @@ Models that read images: OCR on photographed lab reports, X-ray and plant-diseas
 
 ## Web apps and SaaS
 Next.js and React products end to end: multi-tenant SaaS, admin panels, sites matched to a Figma file, and Shopify storefronts.
+
+## Shopify stores
+Custom themes and storefronts, store setup, apps and integrations, with AI and automation where they pay off.
 
 ## Mobile apps
 Expo and React Native apps that keep working offline and sync when the network returns.
