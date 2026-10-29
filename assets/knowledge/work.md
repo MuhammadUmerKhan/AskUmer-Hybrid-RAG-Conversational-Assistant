@@ -10,7 +10,7 @@ Live AI voice interviews for hiring teams, where no model ever scores a candidat
 
 Stack: LiveKit, Deepgram, Cartesia, Groq, LangGraph, FastAPI, Next.js, Supabase.
 
-[case study](https://buildwithumer.vercel.app/work/interviewly) · [live app](https://interviewlyy.vercel.app)
+[case study](https://buildwithumer.site/work/interviewly) · [live app](https://interviewlyy.vercel.app)
 
 ### The problem
 
@@ -46,7 +46,7 @@ Stack: FastAPI, GPT-4o-mini, Pydantic, PostgreSQL, Supabase, Wazzup.
 
 Live in production for a travel agency, built at Saylani Tech.
 
-[case study](https://buildwithumer.vercel.app/work/whatsapp-lead-automation)
+[case study](https://buildwithumer.site/work/whatsapp-lead-automation)
 
 ### The problem
 
@@ -82,7 +82,7 @@ Stack: React, Expo, Supabase, PostgreSQL, Row-level security.
 
 White-label society-management software built at Revera Innovations, live with its first housing society.
 
-[case study](https://buildwithumer.vercel.app/work/society-management-platform)
+[case study](https://buildwithumer.site/work/society-management-platform)
 
 ### The problem
 
@@ -116,7 +116,7 @@ An assistant that refuses to ship worse answers: CI fails below 0.7 faithfulness
 
 Stack: LangGraph, Qdrant, BM25, FlashRank, NeMo Guardrails, Portkey, DeepEval, FastAPI.
 
-[case study](https://buildwithumer.vercel.app/work/askumer) · [source](https://github.com/MuhammadUmerKhan/AskUmer-Hybrid-RAG-Conversational-Assistant) · [CI workflow](https://github.com/MuhammadUmerKhan/AskUmer-Hybrid-RAG-Conversational-Assistant/blob/main/.github/workflows/ci.yml)
+[case study](https://buildwithumer.site/work/askumer) · [source](https://github.com/MuhammadUmerKhan/AskUmer-Hybrid-RAG-Conversational-Assistant) · [CI workflow](https://github.com/MuhammadUmerKhan/AskUmer-Hybrid-RAG-Conversational-Assistant/blob/main/.github/workflows/ci.yml)
 
 ### The problem
 
@@ -134,7 +134,7 @@ A founder or recruiter gives a portfolio under a minute. A chatbot that answers 
 - 898 indexed chunks.
 - A two-phase DeepEval suite generates live answers, then scores Faithfulness and Answer Relevancy with an LLM judge. CI exits non-zero if any sample falls below 0.7.
 - Every request is traced in Logfire, LangSmith and Portkey.
-- It is the assistant answering questions on this site.
+- A lighter build of it runs this site's chat: FAISS and BM25 search over these pages and my résumé, answered by gpt-oss-120b on Groq, without the agent or the guardrails.
 
 ### If you're building something similar
 
@@ -150,7 +150,7 @@ Found and fixed a price-tampering flaw before anyone could exploit it.
 
 Stack: LangGraph, gpt-oss-120b, Whisper, Torch TTS, SQLite.
 
-[case study](https://buildwithumer.vercel.app/work/dinemate) · [live demo](https://dinemate.streamlit.app/) · [security report](https://github.com/MuhammadUmerKhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/blob/main/SECURITY.md) · [source](https://github.com/MuhammadUmerKhan/DineMate-Agentic-AI-for-Automated-Food-Ordering)
+[case study](https://buildwithumer.site/work/dinemate) · [live demo](https://dinemate.streamlit.app/) · [security report](https://github.com/MuhammadUmerKhan/DineMate-Agentic-AI-for-Automated-Food-Ordering/blob/main/SECURITY.md) · [source](https://github.com/MuhammadUmerKhan/DineMate-Agentic-AI-for-Automated-Food-Ordering)
 
 ### The problem
 
@@ -266,7 +266,7 @@ Stack: Next.js 16, TypeScript, Tailwind CSS v4, Motion.
 
 Shown anonymised until the client agrees to be named.
 
-[case study](https://buildwithumer.vercel.app/work/marketing-portfolio-build)
+[case study](https://buildwithumer.site/work/marketing-portfolio-build)
 
 ### The problem
 
