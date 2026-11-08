@@ -122,8 +122,10 @@ class CustomDocChatbot:
         start without egress degrades the answers rather than failing the
         boot — the résumé still loads either way.
 
-        A successful fetch refreshes the snapshot on disk, so the fallback
-        stays useful instead of ageing into the very staleness this fixes.
+        A successful fetch also tries to refresh the snapshot on disk. That
+        works locally; Vercel's deployment disk is read-only, so there the
+        write is refused, the live text is still used, and the committed
+        snapshot is refreshed by a PR after a content change.
         """
         docs = []
         os.makedirs(KNOWLEDGE_CACHE_DIR, exist_ok=True)
@@ -136,13 +138,21 @@ class CustomDocChatbot:
                 res = httpx.get(url, timeout=KNOWLEDGE_TIMEOUT, follow_redirects=True)
                 res.raise_for_status()
                 text, origin = res.text, "live"
-                with open(cache_path, "w", encoding="utf8") as fh:
-                    fh.write(text)
             except Exception as e:
                 logger.warning({"message": f"⚠️ {route}: live fetch failed ({e}); trying snapshot"})
                 if os.path.exists(cache_path):
                     with open(cache_path, encoding="utf8") as fh:
                         text, origin = fh.read(), "snapshot"
+
+            if origin == "live":
+                # A refused write must never cost the live text just fetched:
+                # on Vercel it used to land in the except above and swap the
+                # live site for the committed snapshot on every cold start.
+                try:
+                    with open(cache_path, "w", encoding="utf8") as fh:
+                        fh.write(text)
+                except OSError as e:
+                    logger.info({"message": f"ℹ️ {route}: snapshot not refreshed ({e})"})
 
             if not text or not text.strip():
                 logger.error({"message": f"❌ {route}: no content from live or snapshot — skipped"})
