@@ -2,7 +2,7 @@
 
 Every build by Muhammad Umer Khan: the four on the homepage first, then the archive. Case studies are in full; receipts are links.
 
-## Interviewly
+## HireRound AI
 
 2026 · verified · Product, build and deployment, solo
 
@@ -10,7 +10,9 @@ Live AI voice interviews for hiring teams, where no model ever scores a candidat
 
 Stack: LiveKit, Deepgram, Cartesia, Groq, LangGraph, FastAPI, Next.js, Supabase.
 
-[case study](https://buildwithumer.site/work/interviewly) · [live app](https://interviewlyy.vercel.app)
+Formerly Interviewly.
+
+[case study](https://buildwithumer.site/work/hireround-ai) · [live app](https://hireround.vercel.app)
 
 ### The problem
 
@@ -42,7 +44,7 @@ Companies get more candidates than their recruiters can meet. A first-round tech
 
 Turns each WhatsApp hotel enquiry into a qualified lead, routes it to the team, and relays their answer back.
 
-Stack: FastAPI, GPT-4o-mini, Pydantic, PostgreSQL, Supabase, Wazzup.
+Stack: FastAPI, GPT-5.4 nano, Pydantic, PostgreSQL, Supabase, Wazzup.
 
 Live in production for a travel agency, built at Saylani Tech.
 
@@ -54,7 +56,7 @@ A travel agency that resells hotel rooms took every enquiry by hand on WhatsApp.
 
 ### What I built
 
-- GPT-4o-mini only proposes: it returns a typed patch through structured outputs, and Python validates it and merges it into the lead. An empty field never erases what the customer said earlier, and a correction always gets a fresh confirmation.
+- GPT-5.4 nano only proposes: it returns a typed patch through structured outputs, and Python validates it and merges it into the lead. An empty field never erases what the customer said earlier, and a correction always gets a fresh confirmation.
 - One enquiry can cover several stays, such as two cities on one trip. Each message is routed to the stay it is about, and the customer confirms the whole requirement before anything reaches the team.
 - Every confirmed lead gets a query ID and goes to the team's WhatsApp group. A team member answers by swiping on the lead or quoting its ID, the bot matches the answer to its lead, and it reaches the right customer.
 - It replies in the language the customer wrote in, and ignores the acknowledgements, greetings and chatter that would otherwise open false leads.
@@ -254,7 +256,7 @@ Undated · private · Voice agent build
 
 Answers the call, offers open Cal.com slots, books, and creates the lead and deal in HubSpot.
 
-Stack: Vapi, Retell AI, Cal.com, HubSpot.
+Stack: Retell AI, Cal.com, HubSpot.
 
 ## Portfolio for a performance-marketing consultant
 

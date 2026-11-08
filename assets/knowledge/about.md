@@ -1,6 +1,6 @@
 # About Muhammad Umer Khan
 
-Muhammad Umer Khan is an AI engineer in Karachi, currently AI Engineer at Revera Innovations. AI agents, RAG and voice systems taken from prototype to production, with evaluations in CI and red-team reports published, not promised.
+Muhammad Umer Khan is an AI engineer in Karachi, currently AI Engineer at Revera Innovations. I build AI agents, chat assistants and voice agents for startups, from first prototype to production. See the live builds, then book a free 30-minute audit.
 
 - Book a call: https://cal.com/muhammad-umer-khan-onij8w/build-audit
 - Email: muhammadumerk546@gmail.com
