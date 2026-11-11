@@ -20,6 +20,8 @@ Built with a ReAct LangGraph agent, hybrid vector + keyword retrieval, NeMo Guar
 
 </div>
 
+**Case study:** [AskUmer on buildwithumer.site](https://buildwithumer.site/work/askumer) · **Write-up:** [How I make CI fail when my chatbot's answers get worse](https://buildwithumer.site/articles/rag-chatbot-ci-faithfulness-gate)
+
 ---
 
 ## 🎯 What Is This?
